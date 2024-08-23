@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "instance.id",
+  "type": "java.lang.String",
+  "description": "identidicador unico da instancia'"
+}]}
