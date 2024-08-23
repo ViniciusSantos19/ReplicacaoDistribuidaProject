@@ -1,28 +1,26 @@
-
-
 services:
-
-
- meu_app:
-  build: .
-  env_file:
+  meu_app:
+    build: .
+    env_file:
       - .env
-  ports:
-    - "8080:8080"
-  depends_on:
-    - db
-    - rabbitmq
+    ports:
+      - "8080:8080"
+    environment:
+      INSTANCE_ID: 1
+    depends_on:
+      - db
+      - rabbitmq
 
- db:
-   image: postgres
-   env_file:
-       - .env
-   volumes:
-     - meu_postgres_si:/var/lib/postgresql/data
-   ports:
-     - "5432:5432"
+  db:
+    image: postgres
+    env_file:
+      - .env
+    volumes:
+      - meu_postgres_si:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
-rabbitmq:
+  rabbitmq:
     image: rabbitmq:3-management
     env_file:
       - .env
@@ -33,6 +31,5 @@ rabbitmq:
       - rabbitmq_data:/var/lib/rabbitmq
 
 volumes:
-
- meu_postgres_si:
- rabbitmq_data:
+  meu_postgres_si:
+  rabbitmq_data:
