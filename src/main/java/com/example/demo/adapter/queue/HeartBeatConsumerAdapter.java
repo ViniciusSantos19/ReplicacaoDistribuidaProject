@@ -7,6 +7,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.application.port.queue.HeartBeatConsumerPort;
+import com.example.demo.shared.config.RabbitMqConfiguration;
 
 @Component
 public class HeartBeatConsumerAdapter implements HeartBeatConsumerPort{
@@ -14,7 +15,7 @@ public class HeartBeatConsumerAdapter implements HeartBeatConsumerPort{
 	
 	private final Map<String, Long> replicaStatus = new ConcurrentHashMap<>();
 
-	@RabbitListener(queues = "leader-heartbeat-queue")
+	@RabbitListener(queues = RabbitMqConfiguration.QUEUE1_NAME)
 	@Override
 	public void processarHeartBeat(String message) {
 		String replicaId = extractReplicaId(message);

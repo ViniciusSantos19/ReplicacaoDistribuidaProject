@@ -10,14 +10,17 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMqConfiguration {
 
 	
+	public static final String QUEUE1_NAME = "leader-heartbeat-queue";
+	public static final String QUEUE2_NAME = "sql-replication-queue";
+	
 	@Bean
     public Queue leaderHeartbeatQueue() {
-        return new Queue("leader-heartbeat-queue", true);
+        return new Queue(QUEUE1_NAME, true);
     }
 	
 	@Bean
     public Queue sqlReplicationQueue() {
-        return new Queue("sql-replication-queue", true);
+        return new Queue(QUEUE2_NAME, true);
     }
 	
 }
