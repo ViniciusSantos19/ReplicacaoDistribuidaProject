@@ -1,7 +1,5 @@
 package com.example.demo.adapter.queue;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,16 @@ import com.example.demo.shared.config.RabbitMqConfiguration;
 public class HeartBeatConsumerAdapter implements HeartBeatConsumerPort{
 	
 	@Autowired
-	private CheckIfReplicaIsAliveUseCase checkIfReplicaIsAliveUseCase;
+	private final CheckIfReplicaIsAliveUseCase checkIfReplicaIsAliveUseCase;
+	
+	
+
+	public HeartBeatConsumerAdapter(CheckIfReplicaIsAliveUseCase heartbeatScheduler) {
+		super();
+		this.checkIfReplicaIsAliveUseCase = heartbeatScheduler;
+	}
+
+
 
 	@RabbitListener(queues = RabbitMqConfiguration.QUEUE1_NAME)
 	@Override

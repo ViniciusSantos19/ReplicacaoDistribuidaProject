@@ -20,7 +20,7 @@ public class HeartBeatProducerAdapter implements HeartBeatProducerPort{
 
 	@Override
 	public void sendHeartbeat(String message) {
-			System.out.println("Replica " + message + "enviando heartbeat");
+			System.out.println("Replica " + message + " enviando heartbeat");
 			rabbitTemplate.convertAndSend(RabbitMqConfiguration.QUEUE1_NAME, message);
 	}
 	

@@ -4,11 +4,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
 
 import com.example.demo.application.usecase.CheckIfReplicaIsAliveUseCase;
 
-@Service
 public class CheckIfReplicaIsAliveService implements CheckIfReplicaIsAliveUseCase{
 
 	private final Map<String, Long> replicaStatus = new ConcurrentHashMap<>();
