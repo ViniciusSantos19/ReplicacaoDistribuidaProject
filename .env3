@@ -1,11 +1,11 @@
 POSTGRES_USER=vinicius
 POSTGRES_PASSWORD=1234
 POSTGRES_DB=si_database
-POSTGRES_URL=jdbc:postgresql://db_si:5432/$POSTGRES_DB
+POSTGRES_URL=jdbc:postgresql://db_si3:5432/$POSTGRES_DB
 
 RABBIT_USER=guest
 RABBIT_PASSWORD=guest
 HOST_RABBIT=rabbitmq
 PORT_RABBIT=5672
 
-QUEUE_NAME=instancia-1
+QUEUE_NAME=instancia-3

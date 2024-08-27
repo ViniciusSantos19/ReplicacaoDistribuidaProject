@@ -1,5 +1,5 @@
 package com.example.demo.application.port.queue;
 
 public interface HeartBeatProducerPort {
-	void sendHeartbeat();
+	void sendHeartbeat(String message);
 }

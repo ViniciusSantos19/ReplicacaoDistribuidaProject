@@ -7,11 +7,41 @@ services:
       - "8080:8080"
     environment:
       INSTANCE_ID: 1
+      LIDER_ID: 1
+      PORTA: 8080
     depends_on:
-      - db
+      - db_si
       - rabbitmq
 
-  db:
+  meu_app2:
+    build: .
+    env_file:
+      - .env2
+    ports:
+      - "8081:8081"  # Corrija o mapeamento da porta
+    environment:
+      INSTANCE_ID: 2
+      LIDER_ID: 1
+      PORTA: 8082  # Use a mesma porta interna
+    depends_on:
+      - db_si2
+      - rabbitmq
+
+  meu_app3:
+    build: .
+    env_file:
+      - .env3
+    ports:
+      - "8083:8083"  # Corrija o mapeamento da porta
+    environment:
+      INSTANCE_ID: 3
+      LIDER_ID: 1
+      PORTA: 8083  # Use a mesma porta interna
+    depends_on:
+      - db_si3
+      - rabbitmq
+
+  db_si:
     image: postgres
     env_file:
       - .env
@@ -19,6 +49,24 @@ services:
       - meu_postgres_si:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+
+  db_si2:
+    image: postgres
+    env_file:
+      - .env
+    volumes:
+      - meu_postgres_si2:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"  # Mapeie a porta interna para 5432
+
+  db_si3:
+    image: postgres
+    env_file:
+      - .env
+    volumes:
+      - meu_postgres_si3:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"  # Mapeie a porta interna para 5432
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -32,4 +80,6 @@ services:
 
 volumes:
   meu_postgres_si:
+  meu_postgres_si2:
+  meu_postgres_si3:
   rabbitmq_data:
