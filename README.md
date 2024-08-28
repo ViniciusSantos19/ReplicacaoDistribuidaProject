@@ -1,4 +1,4 @@
-Sistema de Replicação de Banco de Dados
+### Sistema de Replicação de Banco de Dados
 
 Este projeto é uma aplicação para replicação ativa de banco de dados utilizando comunicação em grupo. A aplicação é projetada para distribuir comandos SQL entre uma instância líder e suas réplicas, garantindo a consistência dos dados entre as réplicas.
 Estrutura do Projeto
@@ -6,7 +6,7 @@ Estrutura do Projeto
     Líder: Recebe comandos SQL e os distribui para as réplicas.
     Réplicas: Recebem e executam os comandos SQL distribuídos pela instância líder.
 
-Tecnologias Utilizadas
+#### Tecnologias Utilizadas
 
     Java: Linguagem de programação principal.
     Spring Boot: Framework para desenvolvimento da aplicação.
@@ -15,8 +15,8 @@ Tecnologias Utilizadas
     PostgreSQL: Banco de dados relacional utilizado.
 
 
-Endpoints da API
-Enviar Comando SQL
+#### Endpoints da API
+##### Enviar Comando SQL
 
     URL: /command
 
@@ -30,25 +30,25 @@ Enviar Comando SQL
       "command": "SEU_COMANDO_SQL"
     }
 
-Resposta:
+#### Resposta:
 
     Status HTTP 201 (Criado): Se o comando foi executado com sucesso.
     Status HTTP 500 (Erro Interno do Servidor): Se houve uma falha ao executar o comando.
 
-Configuração do Ambiente
+#### Configuração do Ambiente
 
-Clone o repositório
+#### Clone o repositório
 
 bash
 
-git clone https://github.com/seuusuario/sistema-replicacao.git
+git clone https://github.com/ViniciusSantos19/ReplicacaoDistribuidaProject.git
 cd sistema-replicacao
 
-Configuração do Docker Compose
+#### Configuração do Docker Compose
 
 O projeto utiliza Docker Compose para orquestrar os serviços. Certifique-se de ter o Docker e o Docker Compose instalados. Crie um arquivo .env com as variáveis necessárias:
 
-env
+#### env
 
    
     POSTGRES_USER=vinicius
@@ -65,7 +65,7 @@ env
     NOTFY_QUEUE=notfy-instancia-1
 
 
-Inicie os serviços com:
+#### Inicie os serviços com:
 
 bash
 
@@ -75,7 +75,7 @@ Configuração da Aplicação
 
 Configure os parâmetros de conexão ao RabbitMQ e ao PostgreSQL no arquivo application.properties do Spring Boot. Exemplo:
 
-properties
+#### properties
 
     spring.datasource.url=jdbc:postgresql://db:5432/sua_base
     spring.datasource.username=seuusuario
@@ -90,21 +90,22 @@ properties
     instance.queue.notfy=${NOTFY_QUEUE}
     server.port=${PORTA:8080}
 
-Executando a Aplicação
+#### Executando a Aplicação
 
 Após iniciar os serviços com Docker Compose, a aplicação estará disponível em:
 
     Líder: http://localhost:8080
     Réplicas: Cada réplica estará acessível em portas diferentes, dependendo da configuração.
 
-Testes
+#### Testes
 
 Para testar a replicação:
 
     Envie um comando SQL para a instância líder via endpoint REST.
     Verifique se a alteração foi replicada nas réplicas.
+    No log das aplicações vai aparecer o comando sql que foi enviado
 
-Estrutura do Projeto
+#### Estrutura do Projeto
 
     src/main/java: Código fonte principal.
     src/test/java: Testes automatizados.
