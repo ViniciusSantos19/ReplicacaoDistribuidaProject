@@ -3,6 +3,7 @@ package com.example.demo.adapter.queue;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.application.port.queue.HeartBeatConsumerPort;
@@ -10,6 +11,7 @@ import com.example.demo.application.usecase.CheckIfReplicaIsAliveUseCase;
 import com.example.demo.shared.config.RabbitMqConfiguration;
 
 @Component
+@ConditionalOnProperty(name = "instance.id", havingValue = "1")
 public class HeartBeatConsumerAdapter implements HeartBeatConsumerPort{
 	
 	@Autowired
