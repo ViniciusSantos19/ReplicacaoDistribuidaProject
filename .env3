@@ -9,3 +9,4 @@ HOST_RABBIT=rabbitmq
 PORT_RABBIT=5672
 
 QUEUE_NAME=instancia-3
+NOTFY_QUEUE=notfy-instancia-3

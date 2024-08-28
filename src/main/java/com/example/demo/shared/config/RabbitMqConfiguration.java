@@ -21,18 +21,31 @@ public class RabbitMqConfiguration {
 	@Value("${instance.queue.name}")
 	private  String QUEUE2_NAME;
 	
+	@Value("${instance.queue.notfy}")
+	private String Queue3Name;
+	
 	public static final String EXCHANGE_NAME1 = "my_fanout_exchange_sql_command";
 	
+	public static final String EXCHANGE_NAME2 = "my_fanout_exchange_notfy_fail";
+	
     public static  String QUEUE2_NAME_PUBLIC;
+    
+    public static String QUEUE3_NAME_PUBLIC;
     
     @PostConstruct
     public void init() {
         QUEUE2_NAME_PUBLIC = this.QUEUE2_NAME;
+        QUEUE3_NAME_PUBLIC = this.Queue3Name;
     }
 	
 	@Bean
 	public FanoutExchange myFanoutExchange()  {
 		return new FanoutExchange(EXCHANGE_NAME1);
+	}
+	
+	@Bean
+	public FanoutExchange myFanoutExchangeFails()  {
+		return new FanoutExchange(EXCHANGE_NAME2);
 	}
 	
 	
@@ -46,12 +59,21 @@ public class RabbitMqConfiguration {
         return new Queue(QUEUE2_NAME, true);
     }
 	
+	@Bean
+    public Queue failQueue() {
+        return new Queue(Queue3Name, true);
+    }
+	
 	
 	@Bean
 	public Binding bindToReplica() {
 		return BindingBuilder.bind(replica()).to(myFanoutExchange());
 	}
 	
+	@Bean
+	public Binding bindToFailExchange() {
+		return BindingBuilder.bind(failQueue()).to(myFanoutExchangeFails());
+	}
 	
 	
 }
