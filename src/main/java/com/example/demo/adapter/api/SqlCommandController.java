@@ -23,7 +23,6 @@ public class SqlCommandController {
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void enviarComando(@RequestBody CommandDto comando) {
-		System.out.println("Received SQL Command on the controller: " + comando);
 		var command = new Command(comando.command());
 		sendSqlCommandUseCase.executeCommand(command);
 	}

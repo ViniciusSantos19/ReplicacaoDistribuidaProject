@@ -22,7 +22,6 @@ public class CommandProcucerAdapter implements CommandProducerPort{
 
 	@Override
 	public void sendSqlCommand(String sqlCommand) {
-			System.out.println("Enviando comando sql para filas");
 			rabbitTemplate.convertAndSend(fanoutExchange.getName(), "", sqlCommand);
 	}
 
