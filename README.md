@@ -26,9 +26,9 @@ Enviar Comando SQL
 
     json
 
-{
-  "command": "SEU_COMANDO_SQL"
-}
+    {
+      "command": "SEU_COMANDO_SQL"
+    }
 
 Resposta:
 
