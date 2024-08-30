@@ -25,12 +25,12 @@ public class CheckIfReplicaIsAliveService implements CheckIfReplicaIsAliveUseCas
     replicaStatus.put(replicaId, System.currentTimeMillis());
   }
 
-  @Scheduled(fixedRate = 50000)
+  @Scheduled(fixedRate = 30000)
   @Override
   public void cleanupExpiredReplicas() {
     long currentTime = System.currentTimeMillis();
     replicaStatus.entrySet().removeIf(entry -> {
-      if ((currentTime - entry.getValue()) > 60000) {
+      if ((currentTime - entry.getValue()) > 30000) {
         removeBindPort.unbindQueue("instancia-" + entry.getKey());
         removeBindPort.unbindQueue("notfy-instancia-" + entry.getKey());
         failsNotfyMessageProducerPort.notfyFail(entry.getKey());
